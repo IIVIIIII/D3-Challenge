@@ -35,7 +35,10 @@ var chartGroup = svg.append("g")
 d3.csv("assets/data/data.csv").then(data => {
     // console.log(data)
 
+    console.log(data.map(d => parseFloat(d.poverty)))
     console.log(d3.extent(data.map(d => parseFloat(d.poverty))))
+    console.log(data.map(d => parseFloat(d.obesity)))
+    console.log(d3.extent(data.map(d => parseFloat(d.obesity))))
 
     var xScale = d3.scaleLinear()
       .domain(d3.extent(data.map(d => parseFloat(d.poverty))))
@@ -56,19 +59,38 @@ d3.csv("assets/data/data.csv").then(data => {
     // Add y1-axis to the left side of the display
     chartGroup.append("g")
       // Define the color of the axis text
-      .classed("green", true)
       .call(leftAxis);
 
-    chartGroup.selectAll("circle")
+    var circlesGroup = chartGroup.selectAll("circle")
       .data(data)
       .enter()
       .append("circle")
       .attr("cx", d => xScale(d.poverty))
       .attr("cy", d => yScale(d.obesity))
-      .attr("fill", "red")
+      .attr("stroke", "black")
+      .attr("stroke-width", "2")
+      .attr("fill", "white")
       .attr("r", 10)
 
-    
+    var toolTip = d3.tip()
+      .attr("class", "tooltip")
+      .offset([80, -60])
+      .html(function(d) {
+        return (`<strong>${d.state}<strong><hr>${d.obesity}% obesity`);
+      });
+
+      chartGroup.call(toolTip);
+
+      circlesGroup.on("mouseover", function(d) {
+        toolTip.show(d, this);
+      })
+      // Step 4: Create "mouseout" event listener to hide tooltip
+        .on("mouseout", function(d) {
+          toolTip.hide(d);
+        });
+    }).catch(function(error) {
+      console.log(error);
+
 
     
 

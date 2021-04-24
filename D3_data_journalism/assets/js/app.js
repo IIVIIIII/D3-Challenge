@@ -72,24 +72,34 @@ d3.csv("assets/data/data.csv").then(data => {
       .attr("fill", "white")
       .attr("r", 10)
 
-    var toolTip = d3.tip()
-      .attr("class", "tooltip")
-      .offset([80, -60])
-      .html(function(d) {
-        return (`<strong>${d.state}<strong><hr>${d.poverty}% poverty</hr><hr>${d.obesity}% obesity</hr>`);
-      });
 
-      chartGroup.call(toolTip);
+    var text = chartGroup.selectAll("text")
+      .data(data)
+      .enter()
+      .append("text")
+      .attr("x", d => xScale(d.poverty))
+      .attr("y", d => yScale(d.obesity))
+      .text(function(d) {return d.abbr})
 
-      circlesGroup.on("mouseover", function(d) {
-        toolTip.show(d, this);
-      })
-      // Step 4: Create "mouseout" event listener to hide tooltip
-        .on("mouseout", function(d) {
-          toolTip.hide(d);
-        });
-    }).catch(function(error) {
-      console.log(error);
+
+    // var toolTip = d3.tip()
+    //   .attr("class", "tooltip")
+    //   .offset([80, -60])
+    //   .html(function(d) {
+    //     return (`<strong>${d.state}<strong><hr>${d.poverty}% poverty</hr><hr>${d.obesity}% obesity</hr>`);
+    //   });
+
+    //   chartGroup.call(toolTip);
+
+    //   circlesGroup.on("mouseover", function(d) {
+    //     toolTip.show(d, this);
+    //   })
+    //   // Step 4: Create "mouseout" event listener to hide tooltip
+    //     .on("mouseout", function(d) {
+    //       toolTip.hide(d);
+    //     });
+    // }).catch(function(error) {
+    //   console.log(error);
 
 
     

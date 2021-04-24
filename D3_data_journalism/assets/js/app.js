@@ -48,6 +48,17 @@ d3.csv("assets/data/data.csv").then(data => {
     var bottomAxis = d3.axisBottom(xScale)
     var leftAxis = d3.axisLeft(yScale)
 
+    // Add x-axis
+    chartGroup.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(bottomAxis);
+
+    // Add y1-axis to the left side of the display
+    chartGroup.append("g")
+      // Define the color of the axis text
+      .classed("green", true)
+      .call(leftAxis);
+
     chartGroup.selectAll("circle")
       .data(data)
       .enter()

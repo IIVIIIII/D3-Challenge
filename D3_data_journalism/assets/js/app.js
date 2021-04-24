@@ -32,6 +32,16 @@ var chartGroup = svg.append("g")
 // Step 3:
 // Import data from the donuts.csv file
 // =================================
-d3.csv("assets/data/data.csv").then(function(data) {
-    console.log(data)
+d3.csv("assets/data/data.csv").then(data => {
+    // console.log(data)
+
+    console.log(d3.extent(data.map(d => parseFloat(d.poverty))))
+
+    var xScale = d3.scaleLinear()
+      .domain(d3.extent(data.map(d => parseFloat(d.poverty))))
+      .range([0, width])
+
+
+
+
 })

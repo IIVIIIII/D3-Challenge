@@ -21,7 +21,7 @@ var height = svgHeight - margin.top - margin.bottom;
 // and shift the latter by left and top margins.
 // =================================
 var svg = d3
-  .select("body")
+  .select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -44,6 +44,22 @@ d3.csv("assets/data/data.csv").then(data => {
     var yScale = d3.scaleLinear()
       .domain(d3.extent(data.map(d => parseFloat(d.obesity))))
       .range([height, 0])
+
+    var bottomAxis = d3.axisBottom(xScale)
+    var leftAxis = d3.axisLeft(yScale)
+
+    chartGroup.selectAll("circle")
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("cx", d => xScale(d.poverty))
+      .attr("cy", d => xScale(d.obesity))
+      .attr("fill", "red")
+      .attr("r", 50)
+
+    
+
+    
 
 
 })

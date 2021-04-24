@@ -76,7 +76,7 @@ d3.csv("assets/data/data.csv").then(data => {
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        return (`<strong>${d.state}<strong><hr>${d.obesity}% obesity`);
+        return (`<strong>${d.state}<strong><hr>${d.poverty}% poverty</hr><hr>${d.obesity}% obesity</hr>`);
       });
 
       chartGroup.call(toolTip);

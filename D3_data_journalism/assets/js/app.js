@@ -64,9 +64,9 @@ d3.csv("assets/data/data.csv").then(data => {
       .enter()
       .append("circle")
       .attr("cx", d => xScale(d.poverty))
-      .attr("cy", d => xScale(d.obesity))
+      .attr("cy", d => yScale(d.obesity))
       .attr("fill", "red")
-      .attr("r", 50)
+      .attr("r", 10)
 
     
 

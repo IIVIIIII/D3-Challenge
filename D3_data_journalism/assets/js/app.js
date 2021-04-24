@@ -41,7 +41,9 @@ d3.csv("assets/data/data.csv").then(data => {
       .domain(d3.extent(data.map(d => parseFloat(d.poverty))))
       .range([0, width])
 
-
+    var yScale = d3.scaleLinear()
+      .domain(d3.extent(data.map(d => parseFloat(d.obesity))))
+      .range([height, 0])
 
 
 })

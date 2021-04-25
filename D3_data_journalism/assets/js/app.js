@@ -26,8 +26,6 @@ function windowRespond() {
 
   var svgHeight = window.innerHeight/1.75;
 
-  console.log([svgWidth, svgHeight])
-
   var margin = {
     top: 20,
     right: 40,
@@ -87,13 +85,18 @@ function windowRespond() {
 
       // add titles
       chartGroup.append("text")
+      .attr("text-anchor", "middle")
+      .attr("transform", `translate(${width/2}, ${margin.top - 20})`)
+      .text("Obesity vs Poverty");
+
+      chartGroup.append("text")
         .attr("text-anchor", "middle")
         .attr("transform", `translate(${width/2}, ${height + margin.top + 20})`)
         .text("Poverty (%)");
 
       chartGroup.append("text")
           .attr("text-anchor", "middle")
-          .attr("transform", `translate(${0 - (margin.left/2)}, ${height/2})rotate(-90)`)
+          .attr("transform", `translate(${0 - (margin.left - 20)}, ${height/2})rotate(-90)`)
           .text("Obesity (%)");
 
 

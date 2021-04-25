@@ -8,10 +8,25 @@ function windowRespond() {
   }
 
   // set up chart dimensions
-  var svgWidth = window.innerWidth;
-  var svgHeight = window.innerHeight;
 
-  console.log(svgWidth)
+  var container = window.innerWidth;
+  var svgWidth = 0;
+
+  if (container >= 1200) {
+    svgWidth = 1140
+  } else if (container >= 992) {
+    svgWidth = 960
+  } else if (container >= 768) {
+    svgWidth = 720
+  } else if (container >= 576) {
+    svgWidth = 540
+  } else {
+    svgWidth = container
+  }
+
+  var svgHeight = window.innerHeight/1.75;
+
+  console.log([svgWidth, svgHeight])
 
   var margin = {
     top: 20,
@@ -42,10 +57,10 @@ function windowRespond() {
 
 
       // console.log(data)
-      console.log(data.map(d => parseFloat(d.poverty)))
-      console.log(d3.extent(data.map(d => parseFloat(d.poverty))))
-      console.log(data.map(d => parseFloat(d.obesity)))
-      console.log(d3.extent(data.map(d => parseFloat(d.obesity))))
+      // console.log(data.map(d => parseFloat(d.poverty)))
+      // console.log(d3.extent(data.map(d => parseFloat(d.poverty))))
+      // console.log(data.map(d => parseFloat(d.obesity)))
+      // console.log(d3.extent(data.map(d => parseFloat(d.obesity))))
 
 
       // scale data to svg

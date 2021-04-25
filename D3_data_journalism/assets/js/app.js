@@ -80,7 +80,7 @@ d3.csv("assets/data/data.csv").then(data => {
       .attr("x", d => xScale(d.poverty))
       .attr("y", d => {return (yScale(d.obesity) + 3.75)})
       .attr("text-anchor", "middle")
-      .attr("font-size", 11)
+      .attr("font-size", 10)
       .text(d => d.abbr)
 
 

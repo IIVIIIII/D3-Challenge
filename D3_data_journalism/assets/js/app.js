@@ -1,8 +1,7 @@
 // @TODO: YOUR CODE HERE!
 
 
-// Step 1: Set up our chart
-//= ================================
+// set up chart dimensions
 var svgWidth = 960;
 var svgHeight = 500;
 
@@ -16,10 +15,7 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
-// Step 2: Create an SVG wrapper,
-// append an SVG group that will hold our chart,
-// and shift the latter by left and top margins.
-// =================================
+// create an svg wrapper,
 var svg = d3
   .select("#scatter")
   .append("svg")
@@ -29,20 +25,22 @@ var svg = d3
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-var abbvGroup = svg.append("g")
+var dataGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-// Step 3:
-// Import data from the donuts.csv file
-// =================================
-d3.csv("assets/data/data.csv").then(data => {
-    // console.log(data)
 
+// import data from csv file
+d3.csv("assets/data/data.csv").then(data => {
+
+
+    // console.log(data)
     console.log(data.map(d => parseFloat(d.poverty)))
     console.log(d3.extent(data.map(d => parseFloat(d.poverty))))
     console.log(data.map(d => parseFloat(d.obesity)))
     console.log(d3.extent(data.map(d => parseFloat(d.obesity))))
 
+
+    // scale data to svg
     var xScale = d3.scaleLinear()
       .domain(d3.extent(data.map(d => parseFloat(d.poverty))))
       .range([0, width])
@@ -51,10 +49,11 @@ d3.csv("assets/data/data.csv").then(data => {
       .domain(d3.extent(data.map(d => parseFloat(d.obesity))))
       .range([height, 0])
 
+
+    // create and add axes
     var bottomAxis = d3.axisBottom(xScale)
     var leftAxis = d3.axisLeft(yScale)
 
-    // Add x-axis
     chartGroup.append("g")
       .attr("transform", `translate(0, ${height})`)
       .call(bottomAxis);
@@ -63,20 +62,20 @@ d3.csv("assets/data/data.csv").then(data => {
       .call(leftAxis);
 
 
+    // add titles
     chartGroup.append("text")
       .attr("text-anchor", "middle")
-      .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
+      .attr("transform", `translate(${width/2}, ${height + margin.top + 20})`)
       .text("Poverty (%)");
 
     chartGroup.append("text")
-          .attr("text-anchor", "middle")
-          .attr("transform", `translate(${0 - (margin.left/2)}, ${height/2})rotate(-90)`)
-          .text("Obesity (%)");
+        .attr("text-anchor", "middle")
+        .attr("transform", `translate(${0 - (margin.left/2)}, ${height/2})rotate(-90)`)
+        .text("Obesity (%)");
 
 
-
-
-    var circlesGroup = chartGroup.selectAll("circle")
+    // add data points
+    var circles = dataGroup.selectAll("circle")
       .data(data)
       .enter()
       .append("circle")
@@ -87,9 +86,7 @@ d3.csv("assets/data/data.csv").then(data => {
       .attr("fill", "white")
       .attr("r", 10)
 
-
-
-    abbvGroup.selectAll("text")
+    dataGroup.selectAll("text")
       .data(data)
       .enter()
       .append("text")

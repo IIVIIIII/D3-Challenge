@@ -29,6 +29,9 @@ var svg = d3
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+var abbvGroup = svg.append("g")
+  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
 // Step 3:
 // Import data from the donuts.csv file
 // =================================
@@ -56,10 +59,12 @@ d3.csv("assets/data/data.csv").then(data => {
       .attr("transform", `translate(0, ${height})`)
       .call(bottomAxis);
 
+    // Add y1-axis to the left side of the display
     chartGroup.append("g")
+      // Define the color of the axis text
       .call(leftAxis);
 
-    var circlesGroup = chartGroup.selectAll("circle")
+      var circlesGroup = chartGroup.selectAll("circle")
       .data(data)
       .enter()
       .append("circle")
@@ -70,10 +75,9 @@ d3.csv("assets/data/data.csv").then(data => {
       .attr("fill", "white")
       .attr("r", 10)
 
-    chartGroup.selectAll("text")
-      .remove()
 
-    chartGroup.selectAll("text")
+
+    abbvGroup.selectAll("text")
       .data(data)
       .enter()
       .append("text")

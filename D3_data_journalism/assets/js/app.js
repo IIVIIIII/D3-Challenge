@@ -59,12 +59,23 @@ d3.csv("assets/data/data.csv").then(data => {
       .attr("transform", `translate(0, ${height})`)
       .call(bottomAxis);
 
-    // Add y1-axis to the left side of the display
     chartGroup.append("g")
-      // Define the color of the axis text
       .call(leftAxis);
 
-      var circlesGroup = chartGroup.selectAll("circle")
+
+    chartGroup.append("text")
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
+      .text("Poverty (%)");
+
+    chartGroup.append("text")
+      .attr("transform", `translate(${0}, ${height/2})`)
+      .attr("transform", "rotate(270)")
+      .classed("smurf-text text", true)
+      .text("Obesity (%)");
+
+
+
+    var circlesGroup = chartGroup.selectAll("circle")
       .data(data)
       .enter()
       .append("circle")

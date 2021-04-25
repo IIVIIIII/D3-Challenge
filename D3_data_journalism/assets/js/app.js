@@ -8,7 +8,6 @@ function windowRespond() {
   }
 
   // set up chart dimensions
-
   var container = window.innerWidth;
   var svgWidth = 0;
 
@@ -52,14 +51,6 @@ function windowRespond() {
 
   // import data from csv file
   d3.csv("assets/data/data.csv").then(data => {
-
-
-      // console.log(data)
-      // console.log(data.map(d => parseFloat(d.poverty)))
-      // console.log(d3.extent(data.map(d => parseFloat(d.poverty))))
-      // console.log(data.map(d => parseFloat(d.obesity)))
-      // console.log(d3.extent(data.map(d => parseFloat(d.obesity))))
-
 
       // scale data to svg
       var xScale = d3.scaleLinear()
@@ -123,6 +114,7 @@ function windowRespond() {
         .text(d => d.abbr)
 
 
+      // toolTips if i ever feel like it
       // var toolTip = d3.tip()
       //   .attr("class", "tooltip")
       //   .offset([80, -60])
@@ -143,7 +135,6 @@ function windowRespond() {
       //   console.log(error);
 
   })
-
 }
 
 windowRespond();

@@ -28,7 +28,7 @@ function windowRespond() {
 
   var margin = {
     top: 20,
-    right: 40,
+    right: 100,
     bottom: 60,
     left: 50
   };

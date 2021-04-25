@@ -66,7 +66,7 @@ d3.csv("assets/data/data.csv").then(data => {
       .attr("cx", d => xScale(d.poverty))
       .attr("cy", d => yScale(d.obesity))
       .attr("stroke", "black")
-      .attr("stroke-width", "2")
+      .attr("stroke-width", "1.5")
       .attr("fill", "white")
       .attr("r", 10)
 

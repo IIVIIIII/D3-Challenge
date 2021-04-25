@@ -56,9 +56,7 @@ d3.csv("assets/data/data.csv").then(data => {
       .attr("transform", `translate(0, ${height})`)
       .call(bottomAxis);
 
-    // Add y1-axis to the left side of the display
     chartGroup.append("g")
-      // Define the color of the axis text
       .call(leftAxis);
 
     var circlesGroup = chartGroup.selectAll("circle")
@@ -72,14 +70,18 @@ d3.csv("assets/data/data.csv").then(data => {
       .attr("fill", "white")
       .attr("r", 10)
 
+    chartGroup.selectAll("text")
+      .remove()
 
-    var text = chartGroup.selectAll("text")
+    chartGroup.selectAll("text")
       .data(data)
       .enter()
       .append("text")
+      .text(d => d.abbr)
       .attr("x", d => xScale(d.poverty))
       .attr("y", d => yScale(d.obesity))
-      .text(function(d) {return d.abbr})
+      .attr("text-anchor", "middle")
+
 
 
     // var toolTip = d3.tip()

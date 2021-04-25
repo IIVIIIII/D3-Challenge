@@ -64,19 +64,15 @@ d3.csv("assets/data/data.csv").then(data => {
 
 
     chartGroup.append("text")
+      .attr("text-anchor", "middle")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
       .text("Poverty (%)");
 
     chartGroup.append("text")
           .attr("text-anchor", "middle")
-          .attr("transform", "translate("+ (margin.left/2) +","+(height/2)+")rotate(-90)")
-          .text("Value");
+          .attr("transform", `translate(${0 - (margin.left/2)}, ${height/2})rotate(-90)`)
+          .text("Obesity (%)");
 
-    // chartGroup.append("text")
-    //   .attr("transform", `translate(${0}, ${height/2})`)
-    //   .attr("transform", "rotate(270)")
-    //   .classed("smurf-text text", true)
-    //   .text("Obesity (%)");
 
 
 
